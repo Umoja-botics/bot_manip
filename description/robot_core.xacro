@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+     <xacro:include filename="inertial_macros.xacro" />
+
+    <xacro:property name="chassis_length" value="0.70"/>
+    <xacro:property name="chassis_width" value="0.39"/>
+    <xacro:property name="chassis_height" value="0.20"/>
+    <xacro:property name="chassis_mass" value="40.0"/>
+
+    <xacro:property name="wheel_radius" value="0.14"/>
+    <xacro:property name="wheel_thickness" value="0.06"/>
+    <xacro:property name="wheel_mass" value="2.6578"/>
+    <xacro:property name="wheel_offset_x" value="0.226"/>
+    <xacro:property name="wheel_offset_y" value="0.1485"/>
+    <xacro:property name="wheel_offset_z" value="0.01"/>
+
+    
+    <material name="white">
+        <color rgba="1 1 1 1" />
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+
+    <!-- BASE_FOOTPRINT LINK -->
+
+
+    <link name="base_footprint"/>
+    
+
+
+   <!-- BASE LINK -->
+
+    <!-- <joint name="bases_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 ${-wheel_offset_z}"/>
+    </joint> -->
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267949 0 3.14" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/robot_base.stl"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="1.5707963267949 0 3.14" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/robot_base.stl"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+           <origin xyz="0.0030946 4.78250032638821E-11 0.053305" rpy="0 0 0" />
+        </xacro:inertial_box>
+    </link>
+
+
+    <!-- LEFT WHEEL LINK -->
+
+    <joint name="left_wheel_joint" type="continuous">
+        <limit effort="150" velocity="10.0"/>
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin rpy ="0 0 0" xyz= "0.220 0.250 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+
+
+
+    <link name="left_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+            <origin xyz="-4.1867E-18 0.0068085 -1.65658661799998E-18" rpy="0 0 0" />
+        </xacro:inertial_cylinder>
+    </link>
+
+
+    <!-- RIGHT WHEEL LINK -->
+
+    <joint name="right_wheel_joint" type="continuous">
+    <limit effort="150" velocity="10.0"/>
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin rpy ="0 0 0" xyz= "0.220 -0.250 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    
+
+    <link name="right_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+            <origin xyz="-4.1867E-18 0.0068085 -1.65658661799998E-18" rpy="0 0 0" />
+        </xacro:inertial_cylinder>
+    </link>
+
+   
+
+
+     <!-- wheel back right-->
+
+<joint name="wheel_back_right_joint" type="continuous">
+    <limit effort="150" velocity="10.0"/>
+    <parent link="base_link"/>
+    <child link="wheel_back_right"/>
+    <origin rpy ="0 0 0" xyz= "-0.220 -0.250 0"/>
+    <axis xyz="0 1 0"/>
+
+</joint>
+
+<link name="wheel_back_right">
+
+
+    <visual>
+       <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+            </geometry>
+        <material name="black"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+            </geometry>
+
+    </collision>
+
+     <xacro:inertial_cylinder  mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+        <origin xyz="-4.1867E-18 0.0068085 -1.65658661799998E-18" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+</link>
+
+
+
+<!-- wheel back left-->
+<joint name="wheel_back_left_joint" type="continuous">
+    <limit effort="150" velocity="10.0"/>
+    <parent link="base_link"/>
+    <child link="wheel_back_left"/>
+    <origin rpy ="0 0 0" xyz= "-0.220 0.250 0"/>
+    <axis xyz="0 1 0"/>
+
+</joint>
+<link name="wheel_back_left">
+
+
+    <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+            </geometry>
+        <material name="black"/>
+    </visual>
+
+    <collision>
+            <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
+
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+            </geometry>
+
+    </collision>
+
+     <xacro:inertial_cylinder  mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+        <origin xyz="-4.1867E-18 0.0068085 -1.65658661799998E-18" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+</link>
+
+
+
+
+</robot>

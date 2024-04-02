@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+     <xacro:include filename="inertial_macros.xacro" />
+
+    <xacro:property name="chassis_length" value="0.70"/>
+    <xacro:property name="chassis_width" value="0.39"/>
+    <xacro:property name="chassis_height" value="0.20"/>
+    <xacro:property name="chassis_mass" value="1.0"/>
+
+    <xacro:property name="wheel_radius" value="0.14"/>
+    <xacro:property name="wheel_thickness" value="0.06"/>
+    <xacro:property name="wheel_mass" value="2.6578"/>
+    <xacro:property name="wheel_offset_x" value="0.226"/>
+    <xacro:property name="wheel_offset_y" value="0.1485"/>
+    <xacro:property name="wheel_offset_z" value="0.01"/>
+
+    <xacro:property name="caster_wheel_radius" value="0.033"/>
+    <xacro:property name="caster_wheel_mass" value="0.05"/>
+    <xacro:property name="caster_wheel_offset_x" value="0.075"/>
+    <xacro:property name="caster_wheel_offset_z" value="${wheel_offset_z - wheel_radius + caster_wheel_radius}"/>
+
+    <material name="white">
+        <color rgba="1 1 1 1" />
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+
+    <!-- BASE_FOOTPRINT LINK -->
+
+
+    <link name="base_footprint"/>
+    
+
+
+   <!-- BASE LINK -->
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 ${-wheel_offset_z}"/>
+    </joint>
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 -0.05" rpy="1.5708 0 0"/>
+            <!-- <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry> -->
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_desc1/meshes/robot_base.stl"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+           <origin xyz="0 0 -0.05" rpy="1.5708 0 0"/>
+            <geometry>
+                <mesh filename="/home/klein/manip_ws/src/bot_desc1/meshes/robot_base.stl"/>
+            </geometry>
+            <!-- <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry> -->
+        </collision>
+        <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+             <origin xyz="0 0 -0.05" rpy="1.5708 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+  
+</robot>
