@@ -1,0 +1,8 @@
+# Request
+float64[] positions
+---
+# Result
+bool success
+---
+# Feedback
+string status_message
