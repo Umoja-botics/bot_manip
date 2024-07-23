@@ -16,12 +16,20 @@ find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(trajectory_msgs REQUIRED)
 
 
 install(
-  DIRECTORY  launch  meshes config description
+  DIRECTORY  launch  meshes config description action
   DESTINATION share/${PROJECT_NAME}
 )
+
+add_executable(commander src/commander.cpp)
+ament_target_dependencies(commander rclcpp trajectory_msgs)
+install(TARGETS
+commander
+  DESTINATION lib/${PROJECT_NAME})
+
 
 # Install Python modules
 ament_python_install_package(${PROJECT_NAME})

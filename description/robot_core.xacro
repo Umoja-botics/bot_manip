@@ -56,14 +56,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="1.5707963267949 0 3.14" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/robot_base.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/robot_base.stl"/>
             </geometry>
             <material name="blue"/>
         </visual>
         <collision>
           <origin xyz="0 0 0" rpy="1.5707963267949 0 3.14" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/robot_base.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/robot_base.stl"/>
             </geometry>
         </collision>
         <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
@@ -89,14 +89,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/wheel.stl"/>
             </geometry>
             <material name="black"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/wheel.stl"/>
             </geometry>
         </collision>
         <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
@@ -121,14 +121,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/wheel.stl"/>
             </geometry>
             <material name="black"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/wheel.stl"/>
             </geometry>
         </collision>
         <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
@@ -156,7 +156,7 @@
     <visual>
        <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/wheel.stl"/>
             </geometry>
         <material name="black"/>
     </visual>
@@ -164,7 +164,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/wheel.stl"/>
             </geometry>
 
     </collision>
@@ -191,7 +191,8 @@
     <visual>
             <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+                 <!-- <mesh filename="/home/klein/manip_ws/src/bot_desc1/meshes/wheel.stl"/> -->
+                <mesh filename="$(find bot_manip)/meshes/wheel.stl"/>
             </geometry>
         <material name="black"/>
     </visual>
@@ -200,7 +201,7 @@
             <origin xyz="0 0 0" rpy="1.5707963267949 0 0" />
 
             <geometry>
-                <mesh filename="/home/klein/manip_ws/src/bot_manip/meshes/wheel.stl"/>
+                <mesh filename="$(find bot_manip)/meshes/wheel.stl"/>
             </geometry>
 
     </collision>
