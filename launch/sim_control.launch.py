@@ -42,6 +42,8 @@ from launch.substitutions import Command, FindExecutable, LaunchConfiguration, P
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 import launch
+import os
+from ament_index_python.packages import get_package_share_directory
 
 
 def launch_setup(context, *args, **kwargs):
@@ -60,6 +62,8 @@ def launch_setup(context, *args, **kwargs):
     start_joint_controller = LaunchConfiguration("start_joint_controller")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
+
+    world_path = os.path.join(get_package_share_directory('bot_manip'), 'world' , 'tomatoes1.sdf')
 
     initial_joint_controllers = PathJoinSubstitution(
         [FindPackageShare(runtime_config_package), "config", controllers_file]
@@ -164,7 +168,7 @@ def launch_setup(context, *args, **kwargs):
     )
     # method accepted by my pc to run gazebo
     gazebo_launch_action = launch.actions.ExecuteProcess(
-        cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so'],
+        cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path],
         output='screen',
     )
 

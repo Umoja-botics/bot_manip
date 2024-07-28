@@ -20,14 +20,14 @@ find_package(trajectory_msgs REQUIRED)
 
 
 install(
-  DIRECTORY  launch  meshes config description action
+  DIRECTORY  launch  meshes config description action world
   DESTINATION share/${PROJECT_NAME}
 )
 
 add_executable(commander src/commander.cpp)
 ament_target_dependencies(commander rclcpp trajectory_msgs)
 install(TARGETS
-commander
+  commander
   DESTINATION lib/${PROJECT_NAME})
 
 
